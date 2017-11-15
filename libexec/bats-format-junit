@@ -76,7 +76,7 @@ finish_suite() {
       header
       flush
       footer
-    ) > "TestReport-${class-case}.xml"
+    ) > ./report/"TestReport-${class-case}.xml"
   }
   init_suite
 }
