@@ -10,34 +10,69 @@ init_suite() {
   failures=0
   skipped=0
   suitetest_exec_time=0
+  start_time=0
+  stop_time=0
   name=""
   _buffer=""
 }
 
 header() {
     printf "\
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<testsuite name=\"${class}\" tests=\"${count}\" failures=\"${failures}\" skip=\"${skipped}\" time=\"${suitetest_exec_time}\">\n"
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start=\'${start_time}\' stop=\'${stop_time}\'>
+    <name>${class}</name>
+    <title>${class}</title>
+    <test-cases>\n"
 }
 
 footer() {
-    printf "</testsuite>\n"
+    printf "\
+    </test-cases>
+</ns2:test-suite>\n"
 }
 
-
 pass() {
-    echo "    <testcase classname=\"${class}\" name=\"${name}\" time=\"${test_exec_time}\"/>\n"
+    printf "\
+        <test-case start=\'${start_time}\' status='passed' stop=\'${stop_time}\'>
+            <name>${name}</name>
+            <title>${name}</title>
+            <labels>
+                <label name='feature' value=\'${name}\'/>
+            </labels>
+            <parameters>
+                <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
+            </parameters>
+            <steps/>
+            <attachments/>
+            <description type='markdown'>[Link to Logs](../)</description>
+        </test-case>
+        \n"
 }
 
 fail() {
     printf "\
-    <testcase classname=\"${class}\" name=\"${name}\" time=\"${test_exec_time}\">
-        <failure><![CDATA["
-
-    echo -n "${1}"
-
-    printf "]]></failure>
-    </testcase>\n"
+        <test-case start=\'${start_time}\' status='failed' stop=\'${stop_time}\'>
+            <name>${name}</name>
+            <title>${name}</title>
+            <labels>
+                <label name='feature' value=\'${name}\'/>
+            </labels>
+            <parameters>
+                <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
+            </parameters>
+            <steps/>
+            <attachments/>
+            <failure>
+              <message>Failed: ############# FAILED while ${name} #####################</message>
+              <stack-trace>Error: Failed: ############# FAILED while ${name} #####################
+                  "
+                  echo "${1}"
+                  printf "
+              </stack-trace>
+            </failure>
+            <description type='markdown'>[Link to Logs](../)</description>
+        </test-case>
+        \n"
 }
 
 skip() {
@@ -76,7 +111,7 @@ finish_suite() {
       header
       flush
       footer
-    ) > ./report/"TestReport-${class-case}.xml"
+    ) > ./report/"${class-case}-testsuite.xml"
   }
   init_suite
 }
@@ -129,4 +164,3 @@ while IFS= read -r line; do
     ;;
   esac
 done
-
