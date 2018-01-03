@@ -37,7 +37,7 @@ pass() {
             <name>${name}</name>
             <title>${name}</title>
             <labels>
-                <label name='feature' value=\'${name}\'/>
+                <label name='feature' value='${name}'/>
             </labels>
             <parameters>
                 <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
@@ -55,7 +55,7 @@ fail() {
             <name>${name}</name>
             <title>${name}</title>
             <labels>
-                <label name='feature' value=\'${name}\'/>
+                <label name='feature' value='${name}'/>
             </labels>
             <parameters>
                 <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
