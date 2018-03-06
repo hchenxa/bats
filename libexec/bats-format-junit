@@ -39,9 +39,6 @@ pass() {
             <labels>
                 <label name='feature' value='${name}'/>
             </labels>
-            <parameters>
-                <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
-            </parameters>
             <steps/>
             <attachments/>
             <description type='markdown'>[Link to Logs](../)</description>
@@ -57,9 +54,6 @@ fail() {
             <labels>
                 <label name='feature' value='${name}'/>
             </labels>
-            <parameters>
-                <parameter kind='environment-variable' name='icp.url' value='https://9.111.255.15:8443'/>
-            </parameters>
             <steps/>
             <attachments/>
             <failure>
