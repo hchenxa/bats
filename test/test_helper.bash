@@ -12,5 +12,5 @@ filter_control_sequences() {
 }
 
 teardown() {
-  [ -d "$TMP" ] && rm -f "$TMP"/*
+  [ -d "$TMP" ] && rm -rf "$TMP"/*
 }
