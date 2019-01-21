@@ -29,8 +29,8 @@ fi
 
 BATS_ROOT="$(abs_dirname "$0")"
 mkdir -p "$PREFIX"/{bin,libexec,share/man/man{1,7}}
-cp -R "$BATS_ROOT"/bin/* "$PREFIX"/bin
 cp -R "$BATS_ROOT"/libexec/* "$PREFIX"/libexec
+ln -s "$BATS_ROOT"/libexec/bats "$PREFIX"/bin/bats
 cp "$BATS_ROOT"/man/bats.1 "$PREFIX"/share/man/man1
 cp "$BATS_ROOT"/man/bats.7 "$PREFIX"/share/man/man7
 
