@@ -33,7 +33,6 @@ cp -R "$BATS_ROOT"/libexec/* "$PREFIX"/libexec
 if [[ ! -s "$PREFIX"/bin/bats ]]; then
   ln -s "$BATS_ROOT"/libexec/bats "$PREFIX"/bin/bats
 fi
-
 cp "$BATS_ROOT"/man/bats.1 "$PREFIX"/share/man/man1
 cp "$BATS_ROOT"/man/bats.7 "$PREFIX"/share/man/man7
 
