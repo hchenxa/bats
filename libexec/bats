@@ -150,9 +150,10 @@ else
 fi
 
 set -o pipefail execfail
-mkdir -p $(pwd)/results/daily
+mkdir -p $(pwd)/results
+resultname=$(echo ${filename} | awk -F "/" '{print $NF}')
 if [ -n "$junit" ]; then
   exec "$command" $count_flag $extended_syntax_flag "${filenames[@]}" | "$formatter"
 else
-  exec "$command" $count_flag $extended_syntax_flag "${filenames[@]}" | tee -a $(pwd)/results/daily/result.tap | "$formatter"
+  exec "$command" $count_flag $extended_syntax_flag "${filenames[@]}" | tee -a $(pwd)/results/$resultname.tap | "$formatter"
 fi
